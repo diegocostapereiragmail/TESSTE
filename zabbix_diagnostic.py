@@ -74,11 +74,27 @@ UNSUPPORTED_OLD_DAYS = 7
 # Environment validation
 # ---------------------------------------------------------------------------
 
-DEFAULT_ZABBIX_URL   = "http://172.16.67.130/zabbix"
-DEFAULT_ZABBIX_TOKEN = "aca6291235441c1535073f7ec8f5ffc177fda439b3b2701cd9e0fd5710b92a8c"
+DEFAULT_ZABBIX_URL    = "http://172.16.67.130/zabbix"
+DEFAULT_ZABBIX_TOKEN  = "aca6291235441c1535073f7ec8f5ffc177fda439b3b2701cd9e0fd5710b92a8c"
+# NOTA: a GEMINI_API_KEY NÃO é embutida no código (proteção de segredos do GitHub).
+# Defina via variável de ambiente ou crie um arquivo .env local (ver load_dotenv abaixo).
+
+
+def _load_dotenv():
+    """Carrega variáveis de um arquivo .env local (não versionado), se existir."""
+    env_path = Path(".env")
+    if not env_path.exists():
+        return
+    for line in env_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
 
 
 def load_env() -> dict:
+    _load_dotenv()
     cfg = {
         "ZABBIX_URL":      os.environ.get("ZABBIX_URL", DEFAULT_ZABBIX_URL).rstrip("/"),
         "ZABBIX_TOKEN":    os.environ.get("ZABBIX_TOKEN", DEFAULT_ZABBIX_TOKEN),
