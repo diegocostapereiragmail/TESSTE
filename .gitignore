@@ -1,0 +1,14 @@
+# Segredos e configuração local
+.env
+
+# Estado e cache do agente
+.zabbix_state.json
+.zabbix_gemini_cache.json
+
+# Relatórios gerados
+zabbix_unsupported_report.md
+zabbix_unsupported_report.html
+
+# Python
+__pycache__/
+*.pyc
