@@ -74,10 +74,14 @@ UNSUPPORTED_OLD_DAYS = 7
 # Environment validation
 # ---------------------------------------------------------------------------
 
+DEFAULT_ZABBIX_URL   = "http://172.16.67.130/zabbix"
+DEFAULT_ZABBIX_TOKEN = "aca6291235441c1535073f7ec8f5ffc177fda439b3b2701cd9e0fd5710b92a8c"
+
+
 def load_env() -> dict:
     cfg = {
-        "ZABBIX_URL":      os.environ.get("ZABBIX_URL", "").rstrip("/"),
-        "ZABBIX_TOKEN":    os.environ.get("ZABBIX_TOKEN", ""),
+        "ZABBIX_URL":      os.environ.get("ZABBIX_URL", DEFAULT_ZABBIX_URL).rstrip("/"),
+        "ZABBIX_TOKEN":    os.environ.get("ZABBIX_TOKEN", DEFAULT_ZABBIX_TOKEN),
         "ZABBIX_USER":     os.environ.get("ZABBIX_USER", ""),
         "ZABBIX_PASSWORD": os.environ.get("ZABBIX_PASSWORD", ""),
         "GEMINI_API_KEY":  os.environ.get("GEMINI_API_KEY", ""),
